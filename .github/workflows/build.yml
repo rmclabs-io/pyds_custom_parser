@@ -52,6 +52,8 @@ jobs:
           mkdir -p dist
           mv *.whl dist
           export WHEEL=`ls dist | grep whl | tail -n1` \
+            && mv dist/$WHEEL dist/${WHEEL/-cp36-cp36m-linux_aarch64/-py3-none-any} \
+            && export WHEEL=`ls dist | grep whl | tail -n1` \
             && echo "WHEEL=$WHEEL" >> $GITHUB_ENV
 
       - name: Create Release
