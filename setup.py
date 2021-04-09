@@ -12,7 +12,7 @@ import warnings
 
 
 # ALERT: Do not modify VERSION below by hand! commitizen does this
-VERSION = "1.2.1"
+VERSION = "1.3.0"
 
 try:
     # Available at setup time due to pyproject.toml (PEP 517, 518)

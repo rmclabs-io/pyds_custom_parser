@@ -1,3 +1,9 @@
+## 1.3.0 (2021-04-09)
+
+### Feat
+
+- **analytics**: patch to allow nvdsanalytics plugin metadata extraction (#9)
+
 ## 1.2.1 (2021-02-17)
 
 ### Fix
