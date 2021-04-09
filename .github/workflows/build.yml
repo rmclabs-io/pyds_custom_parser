@@ -1,4 +1,4 @@
-name: Deepstream Jetson Docker
+name: Qemu ARM Docker
 
 on:
   push:
