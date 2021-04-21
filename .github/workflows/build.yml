@@ -1,4 +1,4 @@
-name: Qemu ARM Docker
+name: Build wheels with docker
 
 on:
   push:
@@ -8,18 +8,26 @@ on:
 
 jobs:
 
-  qemu:
+  buildwheels:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-       include:
-         - target: dev
-           arch: arm64
+        include:
+          - arch: arm64
+            deepstream_repo: deepstream-l4t
+            whl_pat: linux_aarch64
+            whl_sub: manylinux2014_aarch64
+          - arch: x86
+            deepstream_repo: deepstream
+            whl_pat: linux_x86_64
+            whl_sub: manylinux2014_x86_64
+           
 
     steps:
 
       - name: Set up QEMU
         id: qemu
+        if: ${{ startsWith(matrix.img, 'l4t') }}
         uses: docker/setup-qemu-action@v1
         with:
           image: tonistiigi/binfmt:latest
@@ -38,7 +46,7 @@ jobs:
             --workdir /opt/dsinstaller \
             -v `pwd`:/opt/dsinstaller \
             --entrypoint tail \
-            nvcr.io/nvidia/deepstream-l4t:5.0.1-20.09-samples \
+            nvcr.io/nvidia/${{ matrix.deepstream_repo }}:5.0.1-20.09-samples \
             -f /dev/null \
           && export CONTAINER_NAME=`cat ./current-container` \
           && echo "CONTAINER_NAME=$CONTAINER_NAME" >> $GITHUB_ENV
@@ -52,7 +60,7 @@ jobs:
           mkdir -p dist
           mv *.whl dist
           export WHEEL=`ls dist | grep whl | tail -n1` \
-            && mv dist/$WHEEL dist/${WHEEL/-cp36-cp36m-linux_aarch64/-py3-none-any} \
+            && mv dist/$WHEEL dist/${WHEEL/${{ matrix.whl_pat }}/${{ matrix.whl_sub }}} \
             && export WHEEL=`ls dist | grep whl | tail -n1` \
             && echo "WHEEL=$WHEEL" >> $GITHUB_ENV
 

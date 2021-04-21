@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 apt-get update \
-  && apt-get install -y \
+  && apt-get install -y --no-install-recommends \
       build-essential \
       python3-venv \
       libgstreamer-plugins-base1.0-dev \
-      python3-dev
+      python3-dev \
+      python3-pip
 
-python3 -m venv .dockervenv
-.dockervenv/bin/pip install --upgrade pip
-.dockervenv/bin/pip wheel .
+python3 -m pip install --upgrade pip wheel setuptools
+
+python3 -m pip wheel \
+  --no-deps \
+  --no-input \
+  .
