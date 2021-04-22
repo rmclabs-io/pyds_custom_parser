@@ -74,15 +74,21 @@ EXT_MODULES = [
     ],
 ]
 
+def readme():
+    with open(Path(__file__).parent / "README.md", encoding='utf-8') as f:
+        markdown = f.read()
+    return markdown
 
 def main():
 
     setup(
         name="pyds_ext",
         version=VERSION,
-        description="DeepStream bindings and extra metadata for tracker and bbox",
+        description="Extra binding patches for nvidia deepstream.",
         ext_modules=EXT_MODULES,
         cmdclass={"build_ext": CustomExtBuilder},
+        long_description=readme(),
+        long_description_content_type='text/markdown'
     )
 
 
