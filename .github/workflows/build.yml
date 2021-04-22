@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run Container detached
+      - name: Build wheel in container
         run: |
           docker run \
             --rm \
@@ -50,7 +50,7 @@ jobs:
         run: |
           mkdir -p dist
           mv *.whl dist
-          export WHEEL=`ls dist | grep whl | tail -n1` \
+          export WHEEL=`ls dist | grep whl | grep ${{ matrix.whl_pat }} | tail -n1` \
             && mv dist/$WHEEL dist/${WHEEL/${{ matrix.whl_pat }}/${{ matrix.whl_sub }}} \
             && export WHEEL=`ls dist | grep whl | tail -n1` \
             && echo "WHEEL=$WHEEL" >> $GITHUB_ENV
