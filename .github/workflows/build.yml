@@ -55,6 +55,9 @@ jobs:
 
       - name: Create wheel from docker
         run: |
+          docker ps
+          sleep 3
+          docker ps
           docker exec ${{ env.CONTAINER_NAME }} \
             .scripts/build.sh
           mkdir -p dist
