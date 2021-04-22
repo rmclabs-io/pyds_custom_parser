@@ -88,9 +88,3 @@ jobs:
           packages_dir: dist
           skip_existing: false
           verbose: true
-
-      - name: Stop docker container
-        if: always()
-        id: stop-docker-container
-        run: |
-          docker container rm --force ${{ env.CONTAINER_NAME }}
