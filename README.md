@@ -1,4 +1,6 @@
-# pyds_custom_meta
+# pyds_ext
+
+Extra binding patches for nvidia deepstream
 
 [pybind11](https://github.com/pybind/pybind11) wrapper to access Nvidia
 [DeepStream](https://developer.nvidia.com/deepstream-sdk) metadata from Python.
@@ -14,7 +16,8 @@
 ### Prerequisites
 
 1. python3.6
-1. Deepstream v5
+1. Deepstream v5.0
+1. Jetson Xavier or Nvidia GPU (deepstream compatible)
 1. [Option A] [pep-517](https://www.python.org/dev/peps/pep-0517/) compatible pip:
 
    ```console
