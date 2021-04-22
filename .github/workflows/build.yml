@@ -27,7 +27,7 @@ jobs:
 
       - name: Set up QEMU
         id: qemu
-        if: ${{ startsWith(matrix.img, 'l4t') }}
+        if: ${{ startsWith(matrix.arch, 'arm64') }}
         uses: docker/setup-qemu-action@v1
         with:
           image: tonistiigi/binfmt:latest
