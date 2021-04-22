@@ -1,3 +1,9 @@
+## 1.4.1 (2021-04-22)
+
+### Fix
+
+- **publish**: also publish arm wheels (#11)
+
 ## 1.4.0 (2021-04-22)
 
 ### Feat
