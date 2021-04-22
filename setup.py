@@ -20,7 +20,7 @@ try:
     from pybind11.setup_helpers import build_ext
 except ImportError as exc:
     warnings.warn(repr(exc))
-    warnings.warn(f"Maybe you forgot to upgrade pip?")
+    warnings.warn("Maybe you forgot to upgrade pip?")
     sys.exit(42)
 
 
