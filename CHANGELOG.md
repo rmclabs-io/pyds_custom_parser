@@ -1,3 +1,9 @@
+## 1.4.0 (2021-04-22)
+
+### Feat
+
+- **x86**: support for non-jetson (GPU) and wheels publish to pypi (#10)
+
 ## 1.3.0 (2021-04-09)
 
 ### Feat
