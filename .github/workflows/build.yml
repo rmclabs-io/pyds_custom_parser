@@ -43,7 +43,7 @@ jobs:
             --workdir /opt/dsinstaller \
             -v `pwd`:/opt/dsinstaller \
             --entrypoint bash \
-            nvcr.io/nvidia/deepstream:5.0.1-20.09-samples \
+            nvcr.io/nvidia/${{ matrix.deepstream_repo }}:5.0.1-20.09-samples \
             .scripts/build.sh
 
       - name: Rename wheel
