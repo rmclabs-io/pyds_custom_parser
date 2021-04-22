@@ -40,26 +40,14 @@ jobs:
         run: |
           docker run \
             --rm \
-            --detach \
-            --cidfile=./current-container \
-            -e DISPLAY=:0 \
             --workdir /opt/dsinstaller \
             -v `pwd`:/opt/dsinstaller \
-            --entrypoint tail \
-            nvcr.io/nvidia/${{ matrix.deepstream_repo }}:5.0.1-20.09-samples \
-            -f /dev/null \
-          && export CONTAINER_NAME=`cat ./current-container` \
-          && echo "CONTAINER_NAME=$CONTAINER_NAME" >> $GITHUB_ENV
-        env:
-          DISPLAY: :0
-
-      - name: Create wheel from docker
-        run: |
-          docker ps
-          sleep 3
-          docker ps
-          docker exec ${{ env.CONTAINER_NAME }} \
+            --entrypoint bash \
+            nvcr.io/nvidia/deepstream:5.0.1-20.09-samples \
             .scripts/build.sh
+
+      - name: Rename wheel
+        run: |
           mkdir -p dist
           mv *.whl dist
           export WHEEL=`ls dist | grep whl | tail -n1` \
